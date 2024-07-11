@@ -1,4 +1,6 @@
 TARGET := cfs
+INSTALL_PATH := /usr/bin/
+CONFIG_FOLDER := ~/.config/$(TARGET)/
 
 all: clean build
 
@@ -9,6 +11,11 @@ build:
 run:
 	./build/$(TARGET)
 
+install: clean build
+	sudo mkdir -p $(CONFIG_FOLDER)
+	sudo mv config.yaml $(CONFIG_FOLDER)
+	sudo mv build/$(TARGET) $(INSTALL_PATH)
+		
 clean:
 	touch *
 	rm -rf build
